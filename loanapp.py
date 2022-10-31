@@ -74,26 +74,22 @@ def predict():
             
         Property_Area = request.form['Property_Area']                
         if (Property_Area == 'Urban'):
-            Urban = 1
-            Semiurban = 0
+            Area_s=2
             
             
         elif (Property_Area == 'Semiurban'):
-            Urban = 0
-            Semiurban = 1
-            
+            Area_s=1
         else:
-            Urban = 0
-            Semiurban = 0
+            Area_s=0
             
-        prediction=model.predict([[ApplicantIncome, CoapplicantIncome, LoanAmount, Dependents, Loan_Amount_Term, Credit_History, Male, Married_Yes, Self_Employed_Yes, Not_Graduate, Semiurban, Urban]])
+        prediction=model.predict([[ApplicantIncome, CoapplicantIncome, LoanAmount, Dependents, Loan_Amount_Term, Credit_History, Male, Married_Yes, Self_Employed_Yes, Not_Graduate, Area_s]])
         
         output = prediction
 
         if output == 0:
-            return render_template('index.html',prediction_text="The applicant is Not Eligible for Loan")
+            return render_template('index.html',prediction_text="The Applicant is Not Eligible for Loan")
         elif output == 1:
-            return render_template('index.html',prediction_text="The applicant is Eligible for Loan")
+            return render_template('index.html',prediction_text="The Applicant is Eligible for Loan")
     else:
         return render_template('index.html')
             
